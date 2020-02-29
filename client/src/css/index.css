@@ -1,0 +1,16 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.tile-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tile-wrapper .tile {
+  border: 1px solid black;
+  flex: 0 0 33.33%;
+  height: 100px;
+}
