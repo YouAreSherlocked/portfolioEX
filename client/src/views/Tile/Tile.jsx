@@ -35,7 +35,7 @@ class Tile extends Component {
 
     console.log(this.getSideLength())
 
-    if (this.props.pseudo && this.props.counter < 3) {
+    if (this.props.pseudo && this.props.counter < 2) {
       this.setPseudoTiles()
     }
   }
@@ -91,13 +91,13 @@ class Tile extends Component {
                         dir='x'>
                   </Tile>
     let newTileY = <Tile parentWidth={this.props.parentWidth}
-                  pseudo
-                  id={this.state.id + 1}
-                  pos={{x: pos.x, y: pos.y + this.getSideLength()}}
-                  showPseudos={this.state.showPseudos}
-                  counter={this.state.counter + 1}
-                  tiles={this.props.tiles}
-                  dir='y'>
+                         pseudo
+                         id={this.state.id + 1}
+                         pos={{x: pos.x, y: pos.y + this.getSideLength()}}
+                         showPseudos={this.state.showPseudos}
+                         counter={this.state.counter + 1}
+                         tiles={this.props.tiles}
+                         dir='y'>
             </Tile>
 
     this.setState({
@@ -108,9 +108,9 @@ class Tile extends Component {
   render() {
     return ( 
       <Fragment>
-        <div className={this.state.pseudo ? "tile-pseudo tile" : "tile"} 
+        <div className={this.state.pseudo ? "tile-pseudo tile" + (this.props.dir ? ' tile-pseudo-' + this.props.dir : '') : "tile"} 
              id={this.state.pseudo ? 'tile-pseudo-' + this.props.dir + this.state.id : 'tile-' + this.state.id}
-             style={{height: this.getSideLength(), width: this.getSideLength(), flexBasis: (100 / this.props.tiles) + '%', background: '#eee', top: this.getTop(), left: this.getLeft(), display: this.state.isShown ? 'block' : 'none'}} 
+             style={{height: this.getSideLength(), width: this.getSideLength(), flexBasis: (100 / this.props.tiles) + '%', top: this.getTop(), left: this.getLeft(), display: this.state.isShown ? 'block' : 'none'}} 
              onMouseEnter={this.handleHover}
              onMouseLeave={this.handleLeave}>{ this.state.pseudo ? '' : this.props.title }
         </div>
