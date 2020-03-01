@@ -9,56 +9,99 @@ class Tile extends Component {
       id: null,
       pseudo: false,
       parent: null,
-      pseudotile: null
+      pseudotiles: [],
+      isShown: true,
+      showPseudos: false,
+      counter: 0
     }
 
-    this.getHeight = this.getHeight.bind(this)
+    this.getSideLength = this.getSideLength.bind(this)
     this.handleHover = this.handleHover.bind(this)
-    this.setPseudoTile = this.setPseudoTile.bind(this)
+    this.handleLeave = this.handleLeave.bind(this)
+    this.setPseudoTiles = this.setPseudoTiles.bind(this)
     this.getTop = this.getTop.bind(this)
     this.getLeft = this.getLeft.bind(this)
+    this.getCurrentElement = this.getCurrentElement.bind(this)
   }
 
   componentDidMount() {
-      this.setState({
+    this.setState({
       id: this.props.id,
       parent: this.props.parent,
-      pseudo: this.props.pseudo
+      pseudo: this.props.pseudo,
+      isShown: this.props.showPseudos,
+      counter: this.props.counter || 0
     })
-    
-    if (this.state.pseudo) {
-      this.setPseudoTile()
+
+    console.log(this.getSideLength())
+
+    if (this.props.pseudo && this.props.counter < 3) {
+      this.setPseudoTiles()
     }
   }
 
-  getHeight() {
-    return this.props.parentWidth / 3
+  getSideLength() {
+    return this.props.parentWidth / this.props.tiles
   }
 
   getTop() {
-    return this.state.pseudo ? this.props.pos.y : null
+    return this.state.pseudo ? this.props.pos.y : 0
   }
 
   getLeft() {
-    return this.state.pseudo ? this.props.pos.x + this.getHeight() : null
+    return this.state.pseudo ? this.props.pos.x : 0
   }
 
   handleHover() {
+    this.setState({
+      showPseudos: true
+    })
     if (!this.state.pseudo) {
-      this.setPseudoTile()
+      this.setPseudoTiles()
     }
   }
 
-  setPseudoTile() {
-    const pos = document.getElementById('tile-' + (this.state.id)).getBoundingClientRect()
-    let newTile = <Tile parentWidth={this.props.parentWidth} 
+  async handleLeave() {
+    await this.setState({
+      showPseudos: false
+    })
+    this.setState({
+      pseudotiles: null
+    })
+  }
+
+  getCurrentElement() {
+    const id = 'tile-' + (this.state.pseudo ? 'pseudo-' + this.props.dir : '') + this.state.id
+    console.log(id)
+    return document.getElementById(id)
+  }
+
+  async setPseudoTiles() {
+    await this.setState({
+      showPseudos: true
+    })
+    const pos = this.getCurrentElement().getBoundingClientRect()
+    let newTileX = <Tile parentWidth={this.props.parentWidth}
                         pseudo
-                        id={this.state.id}
-                        pos={pos}>
+                        id={this.state.id + 1}
+                        pos={{x: pos.x + this.getSideLength(), y: pos.y}}
+                        showPseudos={this.state.showPseudos}
+                        counter={this.state.counter + 1}
+                        tiles={this.props.tiles}
+                        dir='x'>
                   </Tile>
+    let newTileY = <Tile parentWidth={this.props.parentWidth}
+                  pseudo
+                  id={this.state.id + 1}
+                  pos={{x: pos.x, y: pos.y + this.getSideLength()}}
+                  showPseudos={this.state.showPseudos}
+                  counter={this.state.counter + 1}
+                  tiles={this.props.tiles}
+                  dir='y'>
+            </Tile>
 
     this.setState({
-      pseudotile: newTile
+      pseudotiles: [newTileX, newTileY]
     })
   }
 
@@ -66,11 +109,12 @@ class Tile extends Component {
     return ( 
       <Fragment>
         <div className={this.state.pseudo ? "tile-pseudo tile" : "tile"} 
-             id={this.state.pseudo ? 'tile-pseudo-' + this.state.id : 'tile-' + this.state.id}
-             style={{height: this.getHeight(), width: this.getHeight(), background: '#eee', top: this.getTop(), left: this.getLeft()}} 
-             onMouseEnter={this.handleHover}>{ this.state.pseudo ? '' : this.props.title }
+             id={this.state.pseudo ? 'tile-pseudo-' + this.props.dir + this.state.id : 'tile-' + this.state.id}
+             style={{height: this.getSideLength(), width: this.getSideLength(), flexBasis: (100 / this.props.tiles) + '%', background: '#eee', top: this.getTop(), left: this.getLeft(), display: this.state.isShown ? 'block' : 'none'}} 
+             onMouseEnter={this.handleHover}
+             onMouseLeave={this.handleLeave}>{ this.state.pseudo ? '' : this.props.title }
         </div>
-        {this.state.pseudotile}
+        {this.state.pseudotiles}
       </Fragment>
     );
   };
