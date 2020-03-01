@@ -38,19 +38,19 @@ class TileList extends Component {
 
   updateSize() {
     this.setState({
-      width: window.innerWidth
+      width: document.getElementById('tile-wrapper-home').offsetWidth
     })
   }
 
   getTiles() {
     return this.state.tiles.map((tile, i) => (
-      <Tile title={tile.title} parentWidth={this.state.width} key={i}></Tile>
+      <Tile title={tile.title} parentWidth={this.state.width} id={i} key={i}></Tile>
     ))
   }
 
   render() {
     return ( 
-        <div className="tile-wrapper">
+        <div className="tile-wrapper" id="tile-wrapper-home">
           {this.getTiles()}
         </div>
     );

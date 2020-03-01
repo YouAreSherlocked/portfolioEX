@@ -4,13 +4,27 @@
   padding: 0;
 }
 
+h1 {
+  height: 60px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
 .tile-wrapper {
   display: flex;
   flex-wrap: wrap;
+  width: 100vw;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .tile-wrapper .tile {
-  border: 1px solid black;
+  border: 1px solid #fff;
   flex: 0 0 33.33%;
   height: 100px;
+}
+
+.tile-wrapper .tile-pseudo {
+  background: #333 !important;
+  position: absolute;
 }

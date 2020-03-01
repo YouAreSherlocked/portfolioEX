@@ -13,7 +13,7 @@ class Home extends Component {
   render() {
     return ( 
       <Fragment>
-        <h2>Home</h2>
+        <h1>Home</h1>
         <TileList></TileList>
       </Fragment>
     );
