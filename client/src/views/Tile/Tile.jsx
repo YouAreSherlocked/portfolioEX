@@ -138,13 +138,15 @@ class Tile extends Component {
                style={{height: this.getSideLength(),
                        flexBasis: (100 / this.getResponsiveTileCount()) + '%',
                        display: this.state.isShown ? 'flex' : 'none',
-                       //backgroundImage: 'url(' + this.props.project.img + ')'
+                       backgroundImage: 'url(' + this.props.project.img + ')',
+                       color: this.props.project.accent
                       }} 
-               onMouseEnter={this.handleHover}
+               onMouseOver={this.handleHover}
                onMouseLeave={this.handleLeave}>
               <p>{ this.props.pseudo ? '' : this.props.project.title }</p>
-              <hr></hr>
+              <hr style={{ borderColor: this.props.accent }}></hr>
               <h2>{ this.getTileNumber() }</h2>
+              <div className="bg-black"></div>
           </div>
         :
           <div className={"tile-pseudo tile" + (this.props.dir ? ' tile-pseudo-' + this.props.dir : '')} 
@@ -154,6 +156,7 @@ class Tile extends Component {
                     top: this.getTop(), 
                     left: this.getLeft(), 
                     display: this.state.isShown ? 'block' : 'none',
+                    backgroundColor: this.props.accent,
                   }}>
           </div>
         }

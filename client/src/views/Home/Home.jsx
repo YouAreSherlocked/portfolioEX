@@ -14,7 +14,7 @@ class Home extends Component {
     return ( 
       <Fragment>
         <div className="header">
-          <h1>timo mayer</h1>
+          <a href="/"><h1>timo mayer</h1></a>
           <nav>
             <li><a href="">About</a></li>
             <li><a href="">Contact</a></li>

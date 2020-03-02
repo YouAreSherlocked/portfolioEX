@@ -1,44 +1,49 @@
 const getAllProjects = () => {
   const projects = [
     {
-      title: 'okok',
+      title: '1 Day Project',
       img: require('../assets/img/illustration_small.jpg'),
-      accentColor: '#fff'
+      accent: '#fff'
     },
     {
-      title: 'second one',
-      img: require('../assets/img/illustration_small.jpg'),
-      accentColor: '#fff'
+      title: 'Save the Date',
+      img: require('../assets/img/stamp_michelle_yan.jpg'),
+      accent: '#111'
     },
     {
-      title: 'third one',
-      img: require('../assets/img/illustration_small.jpg'),
-      accentColor: '#fff'
+      title: 'Mirayon',
+      img: require('../assets/img/mirayon.jpg'),
+      accent: '#fff'
     },
     {
-      title: 'fourth one',
-      img: require('../assets/img/illustration_small.jpg'),
-      accentColor: '#fff'
+      title: 'Ireland',
+      img: require('../assets/img/ireland.jpg'),
+      accent: '#d4d2d4'
     },
     {
-      title: 'fifth one',
-      img: require('../assets/img/illustration_small.jpg'),
-      accentColor: '#fff'
+      title: 'Seoul',
+      img: require('../assets/img/south-korea-19-61.jpg'),
+      accent: '#b65433'
     },
     {
-      title: 'third one',
-      img: require('../assets/img/illustration_small.jpg'),
-      accentColor: '#fff'
+      title: 'Ex Humanitas',
+      img: require('../assets/img/ex-humanitas-cover-WIDE.jpg'),
+      accent: '#fff'
     },
     {
-      title: 'fourth one',
-      img: require('../assets/img/illustration_small.jpg'),
-      accentColor: '#fff'
+      title: 'JG Genesis',
+      img: require('../assets/img/genesis_stories_logo_v2-crop-u3554.jpg'),
+      accent: '#111'
     },
     {
-      title: 'fifth one',
-      img: require('../assets/img/illustration_small.jpg'),
-      accentColor: '#fff'
+      title: 'DBC Swisscom',
+      img: require('../assets/img/dbc.jpg'),
+      accent: '#fff'                 
+    },
+    {
+      title: 'Portfolio',
+      img: require('../assets/img/portfolio_2.jpg'),
+      accent: '#fff'                 
     }
   ]
 
