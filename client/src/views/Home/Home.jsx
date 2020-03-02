@@ -13,7 +13,13 @@ class Home extends Component {
   render() {
     return ( 
       <Fragment>
-        <h1>Home</h1>
+        <div className="header">
+          <h1>timo mayer</h1>
+          <nav>
+            <li><a href="">About</a></li>
+            <li><a href="">Contact</a></li>
+          </nav>
+        </div>
         <TileList></TileList>
       </Fragment>
     );

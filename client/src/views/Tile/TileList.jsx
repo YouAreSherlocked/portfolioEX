@@ -2,36 +2,27 @@ import React, { Component } from 'react';
 import '../../css/index.css';
 import { withRouter } from 'react-router-dom';
 import Tile from './Tile'
+import * as fetch from '../../service'
 
 class TileList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      tiles: [
-        {
-          title: 'okok'
-        },
-        {
-          title: 'second one'
-        },
-        {
-          title: 'third one'
-        },
-        {
-          title: 'fourth one'
-        },
-        {
-          title: 'fifth one'
-        }
-      ],
-      width: 1
+      width: 0,
+      projects: []
     }
 
     this.updateSize = this.updateSize.bind(this)
   }
 
-  componentDidMount() {
+   async componentDidMount() {
+    const projects = await fetch.projects.getAllProjects();
+    console.log(projects)
+    this.setState({
+      projects: projects
+    })
+
     this.updateSize()
     window.addEventListener('resize', this.updateSize);
   }
@@ -43,16 +34,22 @@ class TileList extends Component {
   }
 
   getTiles() {
-    return this.state.tiles.map((tile, i) => (
-      <Tile title={tile.title} parentWidth={this.state.width} id={i} key={i} showPseudos tiles={5}></Tile>
+    return this.state.projects.map((project, i) => (
+      <Tile project={project} parentWidth={this.state.width} id={i} key={i} showPseudos tiles={3}></Tile>
     ))
   }
 
   render() {
     return ( 
-        <div className="tile-wrapper" id="tile-wrapper-home">
-          {this.getTiles()}
-        </div>
+      
+      <div className="tile-wrapper" id="tile-wrapper-home">
+        { this.state.projects ?
+          this.getTiles()
+        :
+          <p>Loading Projects</p>
+        }
+      </div>
+
     );
   };
 }
