@@ -33,7 +33,8 @@ class Tile extends Component {
       counter: this.props.counter || 0
     })
 
-    if (this.props.pseudo && this.props.counter < 2) {
+    
+    if (this.props.pseudo && this.props.counter < 8) {
       this.setPseudoTiles()
     }
   }
@@ -83,31 +84,66 @@ class Tile extends Component {
     await this.setState({
       showPseudos: true
     })
+    let tiles = []
     const pos = this.getOffset(this.getCurrentElement())
-    
-    let newTileX = <Tile parentWidth={this.props.parentWidth}
-                         pseudo
-                         id={this.state.id + 1}
-                         pos={{x: pos.x + this.getSideLength(), y: pos.y}}
-                         showPseudos={this.state.showPseudos}
-                         counter={this.state.counter + 1}
-                         tiles={this.props.tiles}
-                         dir='x'
-                         key={'x' + this.state.id + 1}>
-                  </Tile>
-    let newTileY = <Tile parentWidth={this.props.parentWidth}
-                         pseudo
-                         id={this.state.id + 1}
-                         pos={{x: pos.x, y: pos.y + this.getSideLength()}}
-                         showPseudos={this.state.showPseudos}
-                         counter={this.state.counter + 1}
-                         tiles={this.props.tiles}
-                         dir='y'
-                         key={'y' + this.state.id + 1}>
-            </Tile>
+    if (this.props.id >= 0 && this.props.id < this.props.tiles) {
+      console.log('x+')
+      // tiles.push(<Tile parentWidth={this.props.parentWidth}
+      //                    pseudo
+      //                    id={this.props.id + 1}
+      //                    pos={{x: pos.x + this.getSideLength(), y: pos.y}}
+      //                    showPseudos={this.state.showPseudos}
+      //                    counter={this.state.counter + 1}
+      //                    tiles={this.props.tiles}
+      //                    dir='x'
+      //                    key={'x+' + this.state.id + 1}>
+      //             </Tile>)
+    }
+    if (this.props.id > 0 && this.props.id <= this.props.tiles) {
+      console.log('x-')
+
+      // tiles.push(<Tile parentWidth={this.props.parentWidth}
+      //                    pseudo
+      //                    id={this.props.id - 1}
+      //                    pos={{x: pos.x - this.getSideLength(), y: pos.y}}
+      //                    showPseudos={this.state.showPseudos}
+      //                    counter={this.state.counter + 1}
+      //                    tiles={this.props.tiles}
+      //                    dir='x'
+      //                    key={'x-' + this.state.id - 1}>
+      //             </Tile>)
+    }
+    if (this.props.id >= 0 && this.props.id < 4) {
+      console.log('y+')
+
+      // tiles.push(<Tile parentWidth={this.props.parentWidth}
+      //                     pseudo
+      //                     id={this.props.id + 1}
+      //                     pos={{x: pos.x, y: pos.y + this.getSideLength()}}
+      //                     showPseudos={this.state.showPseudos}
+      //                     counter={this.state.counter + 1}
+      //                     tiles={this.props.tiles}
+      //                     dir='y'
+      //                     key={'y+' + this.state.id + 1}>
+      //             </Tile>)
+    }
+    if (this.props.id > 0 && this.props.id <= 4) {
+      console.log('y-')
+
+      // tiles.push(<Tile parentWidth={this.props.parentWidth}
+      //                     pseudo
+      //                     id={this.props.id - 1}
+      //                     pos={{x: pos.x, y: pos.y - this.getSideLength()}}
+      //                     showPseudos={this.state.showPseudos}
+      //                     counter={this.state.counter + 1}
+      //                     tiles={this.props.tiles}
+      //                     dir='y'
+      //                     key={'y-' + this.state.id - 1}>
+      //             </Tile>)
+    }
 
     this.setState({
-      pseudotiles: [newTileX, newTileY]
+      pseudotiles: tiles
     })
   }
 
@@ -134,11 +170,11 @@ class Tile extends Component {
       <Fragment>
         { !this.props.pseudo ? 
           <div className="tile" 
-               id={'tile-' + this.state.id}
+               id={'tile-' + this.props.id}
                style={{height: this.getSideLength(),
                        flexBasis: (100 / this.getResponsiveTileCount()) + '%',
                        display: this.state.isShown ? 'flex' : 'none',
-                       backgroundImage: 'url(' + this.props.project.img + ')',
+                       //backgroundImage: 'url(' + this.props.project.img + ')',
                        color: this.props.project.accent
                       }} 
                onMouseOver={this.handleHover}
@@ -150,7 +186,7 @@ class Tile extends Component {
           </div>
         :
           <div className={"tile-pseudo tile" + (this.props.dir ? ' tile-pseudo-' + this.props.dir : '')} 
-            id={'tile-pseudo-' + this.props.dir + this.state.id}
+            id={'tile-pseudo-' + this.props.dir + this.props.id}
             style={{height: this.getSideLength(), 
                     width: this.getSideLength(),
                     top: this.getTop(), 

@@ -44,6 +44,21 @@ const getAllProjects = () => {
       title: 'Portfolio',
       img: require('../assets/img/portfolio_2.jpg'),
       accent: '#fff'                 
+    },
+    {
+      title: 'Apps Team',
+      img: require('../assets/img/comic.jpg'),
+      accent: '#111'                 
+    },
+    {
+      title: 'Sledgecamp',
+      img: require('../assets/img/sledgecamp_flyer_19.jpg'),
+      accent: '#111'                 
+    },
+    {
+      title: 'El Timon',
+      img: require('../assets/img/photo5978709766295368137.jpg'),
+      accent: '#fff'                 
     }
   ]
 

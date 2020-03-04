@@ -18,7 +18,6 @@ class TileList extends Component {
 
    async componentDidMount() {
     const projects = await fetch.projects.getAllProjects();
-    console.log(projects)
     this.setState({
       projects: projects
     })
