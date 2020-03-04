@@ -58,7 +58,6 @@ a:hover {
   flex: 0 0 33.33%;
   height: 100px;
   background-color: #eee;
-  /*background-image: url(../assets/img/illustration_small.jpg);*/
   background-size: cover;
   background-position: center;
   display: flex;
@@ -86,20 +85,6 @@ a:hover {
 .tile-wrapper .tile p {
   font-size: 18px;
   color: inherit;
-}
-
-.tile-wrapper .tile-pseudo {
-  background-color: #333;
-  position: absolute;
-  transform-origin: top left;
-}
-
-.tile-wrapper .tile-pseudo.tile-pseudo-x {
-  animation: .5s ease tilt-x;
-}
-
-.tile-wrapper .tile-pseudo.tile-pseudo-y {
-  animation: .5s ease tilt-y;
 }
 
 @keyframes tilt-x {

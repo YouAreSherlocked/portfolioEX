@@ -34,7 +34,7 @@ class TileList extends Component {
 
   getTiles() {
     return this.state.projects.map((project, i) => (
-      <Tile project={project} parentWidth={this.state.width} id={i} key={i} showPseudos tiles={3}></Tile>
+      <Tile project={project} parentWidth={this.state.width} id={i} key={i} tiles={3}></Tile>
     ))
   }
 
