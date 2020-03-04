@@ -16,8 +16,8 @@ class Home extends Component {
         <div className="header">
           <a href="/"><h1>timo mayer</h1></a>
           <nav>
-            <li><a href="">About</a></li>
-            <li><a href="">Contact</a></li>
+            <li><a href="/">About</a></li>
+            <li><a href="/">Contact</a></li>
           </nav>
         </div>
         <TileList></TileList>

@@ -67,6 +67,7 @@ a:hover {
   padding: 50px;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .tile-wrapper .tile *:not(.bg) {

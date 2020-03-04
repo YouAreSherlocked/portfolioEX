@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import '../../css/index.css';
 
 class Tile extends Component {
@@ -17,7 +18,7 @@ class Tile extends Component {
 
   async componentDidMount() {
     await this.setState({
-      id: this.props.id,
+      id: this.props.project.id,
       active: false
     })
   }
@@ -50,7 +51,7 @@ class Tile extends Component {
 
   render() {
     return ( 
-      <div className="tile" 
+      <Link to={ 'detail/' + this.state.id } className="tile"
             id={ 'tile-' + this.props.id }
             style={{height: this.getSideLength(),
                     flexBasis: (100 / this.getResponsiveTileCount()) + '%',
@@ -62,8 +63,8 @@ class Tile extends Component {
           <p>{ this.props.project.title }</p>
           <hr style={{ borderColor: this.props.accent }}></hr>
           <h2>{ this.getTileNumber() }</h2>
-         <div className={'bg ' + (this.props.project.accent === '#111' ? 'bg-white' : 'bg-black') }></div>
-      </div>
+        <div className={'bg ' + (this.props.project.accent === '#111' ? 'bg-white' : 'bg-black') }></div>
+      </Link>
     );
   };
 }
