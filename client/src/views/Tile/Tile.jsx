@@ -64,7 +64,7 @@ class Tile extends Component {
   }
 
   getCurrentElement() {
-    const id = 'tile-' + (this.state.pseudo ? 'pseudo-' + this.props.dir : '') + this.state.id
+    const id = 'tile-' + (this.state.pseudo ? 'pseudo-' + this.props.axis : '') + this.state.id
     return document.getElementById(id)
   }
 
@@ -86,60 +86,64 @@ class Tile extends Component {
     })
     let tiles = []
     const pos = this.getOffset(this.getCurrentElement())
-    if (this.props.id >= 0 && this.props.id < this.props.tiles) {
+    if (this.props.id >= 0 && this.props.id < this.props.tiles && this.props.dir === '+') {
       console.log('x+')
-      // tiles.push(<Tile parentWidth={this.props.parentWidth}
-      //                    pseudo
-      //                    id={this.props.id + 1}
-      //                    pos={{x: pos.x + this.getSideLength(), y: pos.y}}
-      //                    showPseudos={this.state.showPseudos}
-      //                    counter={this.state.counter + 1}
-      //                    tiles={this.props.tiles}
-      //                    dir='x'
-      //                    key={'x+' + this.state.id + 1}>
-      //             </Tile>)
+      tiles.push(<Tile parentWidth={this.props.parentWidth}
+                         pseudo
+                         id={this.props.id + 1}
+                         pos={{x: pos.x + this.getSideLength(), y: pos.y}}
+                         showPseudos={this.state.showPseudos}
+                         counter={this.state.counter + 1}
+                         tiles={this.props.tiles}
+                         axis='x'
+                         dir='+'
+                         key={'x+' + this.state.id + 1}>
+                  </Tile>)
     }
-    if (this.props.id > 0 && this.props.id <= this.props.tiles) {
+    if (this.props.id > 0 && this.props.id <= this.props.tiles && this.props.dir === '-') {
       console.log('x-')
 
-      // tiles.push(<Tile parentWidth={this.props.parentWidth}
-      //                    pseudo
-      //                    id={this.props.id - 1}
-      //                    pos={{x: pos.x - this.getSideLength(), y: pos.y}}
-      //                    showPseudos={this.state.showPseudos}
-      //                    counter={this.state.counter + 1}
-      //                    tiles={this.props.tiles}
-      //                    dir='x'
-      //                    key={'x-' + this.state.id - 1}>
-      //             </Tile>)
+      tiles.push(<Tile parentWidth={this.props.parentWidth}
+                         pseudo
+                         id={this.props.id - 1}
+                         pos={{x: pos.x - this.getSideLength(), y: pos.y}}
+                         showPseudos={this.state.showPseudos}
+                         counter={this.state.counter + 1}
+                         tiles={this.props.tiles}
+                         axis='x'
+                         dir='-'
+                         key={'x-' + this.state.id - 1}>
+                  </Tile>)
     }
-    if (this.props.id >= 0 && this.props.id < 4) {
+    if (this.props.id >= 0 && this.props.id < 4 && this.props.dir === '+') {
       console.log('y+')
 
-      // tiles.push(<Tile parentWidth={this.props.parentWidth}
-      //                     pseudo
-      //                     id={this.props.id + 1}
-      //                     pos={{x: pos.x, y: pos.y + this.getSideLength()}}
-      //                     showPseudos={this.state.showPseudos}
-      //                     counter={this.state.counter + 1}
-      //                     tiles={this.props.tiles}
-      //                     dir='y'
-      //                     key={'y+' + this.state.id + 1}>
-      //             </Tile>)
+      tiles.push(<Tile parentWidth={this.props.parentWidth}
+                          pseudo
+                          id={this.props.id + 1}
+                          pos={{x: pos.x, y: pos.y + this.getSideLength()}}
+                          showPseudos={this.state.showPseudos}
+                          counter={this.state.counter + 1}
+                          tiles={this.props.tiles}
+                          axis='y'
+                          dir='+'
+                          key={'y+' + this.state.id + 1}>
+                  </Tile>)
     }
-    if (this.props.id > 0 && this.props.id <= 4) {
+    if (this.props.id > 0 && this.props.id <= 4 && this.props.dir === '-') {
       console.log('y-')
 
-      // tiles.push(<Tile parentWidth={this.props.parentWidth}
-      //                     pseudo
-      //                     id={this.props.id - 1}
-      //                     pos={{x: pos.x, y: pos.y - this.getSideLength()}}
-      //                     showPseudos={this.state.showPseudos}
-      //                     counter={this.state.counter + 1}
-      //                     tiles={this.props.tiles}
-      //                     dir='y'
-      //                     key={'y-' + this.state.id - 1}>
-      //             </Tile>)
+      tiles.push(<Tile parentWidth={this.props.parentWidth}
+                          pseudo
+                          id={this.props.id - 1}
+                          pos={{x: pos.x, y: pos.y - this.getSideLength()}}
+                          showPseudos={this.state.showPseudos}
+                          counter={this.state.counter + 1}
+                          tiles={this.props.tiles}
+                          axis='y'
+                          dir='-'
+                          key={'y-' + this.state.id - 1}>
+                  </Tile>)
     }
 
     this.setState({
@@ -174,7 +178,7 @@ class Tile extends Component {
                style={{height: this.getSideLength(),
                        flexBasis: (100 / this.getResponsiveTileCount()) + '%',
                        display: this.state.isShown ? 'flex' : 'none',
-                       //backgroundImage: 'url(' + this.props.project.img + ')',
+                       backgroundImage: 'url(' + this.props.project.img + ')',
                        color: this.props.project.accent
                       }} 
                onMouseOver={this.handleHover}
@@ -185,8 +189,8 @@ class Tile extends Component {
               <div className="bg-black"></div>
           </div>
         :
-          <div className={"tile-pseudo tile" + (this.props.dir ? ' tile-pseudo-' + this.props.dir : '')} 
-            id={'tile-pseudo-' + this.props.dir + this.props.id}
+          <div className={"tile-pseudo tile" + (this.props.axis ? ' tile-pseudo-' + this.props.axis : '')} 
+            id={'tile-pseudo-' + this.props.axis + this.props.id}
             style={{height: this.getSideLength(), 
                     width: this.getSideLength(),
                     top: this.getTop(), 

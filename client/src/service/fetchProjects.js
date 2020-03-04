@@ -41,8 +41,8 @@ const getAllProjects = () => {
       accent: '#fff'                 
     },
     {
-      title: 'Portfolio',
-      img: require('../assets/img/portfolio_2.jpg'),
+      title: 'Jelly',
+      img: require('../assets/img/jelly.png'),
       accent: '#fff'                 
     },
     {
@@ -58,6 +58,11 @@ const getAllProjects = () => {
     {
       title: 'El Timon',
       img: require('../assets/img/photo5978709766295368137.jpg'),
+      accent: '#fff'                 
+    },
+    {
+      title: 'Portfolio',
+      img: require('../assets/img/portfolio_2.jpg'),
       accent: '#fff'                 
     }
   ]
